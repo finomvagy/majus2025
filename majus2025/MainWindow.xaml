@@ -1,0 +1,80 @@
+﻿<Window x:Class="majus2025.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kvíz alkalmazás" Height="750" Width="720" Background="#202020">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Bejelentkezés / Regisztráció -->
+        <Border Background="#303030" Padding="15" CornerRadius="10" Margin="0,0,0,10" Grid.Row="0">
+            <StackPanel>
+                <TextBlock Text="Bejelentkezés vagy Regisztráció" Foreground="#C0C0C0" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <Label Content="Felhasználónév" Foreground="Gray" Margin="0,0,0,2"/>
+                <TextBox x:Name="tbUsername" Background="#404040" Foreground="White" Padding="5" Height="30" Margin="0,0,0,5"/>
+                <Label Content="Jelszó" Foreground="Gray" Margin="0,5,0,2"/>
+                <PasswordBox x:Name="pbPassword" Background="#404040" Foreground="White" Padding="5" Height="30" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                    <Button x:Name="btnLogin" Content="Bejelentkezés" Width="110" Margin="5,0" Click="BtnLogin_Click" />
+                    <Button x:Name="btnRegister" Content="Regisztráció" Width="110" Margin="5,0" Click="BtnRegister_Click" />
+                </StackPanel>
+                <TextBlock x:Name="tbLoginMessage" Foreground="LightCoral" Margin="0,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Kvízek kezelése -->
+        <Border Background="#303030" Padding="15" CornerRadius="10" Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="Kvízek kezelése" Foreground="#C0C0C0" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+
+                <!-- Kvíz létrehozása -->
+                <TextBlock Text="Új kvíz létrehozása / Szerkesztés alatt álló kvíz" Foreground="Gray" Margin="0,0,0,5"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="tbQuizTitle" Grid.Column="0" Margin="0,0,5,0" Background="#404040" Foreground="White" Padding="5" VerticalContentAlignment="Center" ToolTip="Kvíz címe"/>
+                    <TextBox x:Name="tbQuizDescription" Grid.Column="1" Margin="0,0,5,0" Background="#404040" Foreground="White" Padding="5" VerticalContentAlignment="Center" ToolTip="Kvíz leírása"/>
+                    <TextBox x:Name="tbQuizDifficulty" Grid.Column="2" Margin="0,0,5,0" Background="#404040" Foreground="White" Padding="5" VerticalContentAlignment="Center" ToolTip="Nehézség (pl. könnyű)"/>
+                    <TextBox x:Name="tbQuizCategory" Grid.Column="3" Margin="0,0,5,0" Background="#404040" Foreground="White" Padding="5" VerticalContentAlignment="Center" ToolTip="Kategória (pl. történelem)"/>
+                    <Button x:Name="btnSaveQuiz" Grid.Column="4" Content="Új kvíz mentése" Click="BtnCreateQuiz_Click" Width="130" />
+                </Grid>
+                <TextBlock x:Name="tbQuizEditId" Visibility="Collapsed"/>
+                <!-- Rejtett mező a szerkesztett kvíz ID-jának tárolására -->
+
+
+                <!-- Szűrés és Rendezés -->
+                <TextBlock Text="Szűrés és Rendezés" Foreground="Gray" Margin="0,15,0,5"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                    <TextBox x:Name="tbSearchTitle" Width="150" Background="#404040" Foreground="White" Padding="5" VerticalContentAlignment="Center" ToolTip="Keresés cím alapján"/>
+                    <Button Content="Keresés címre" Width="110" Margin="5,0,0,0" Click="BtnSearch_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                    <TextBox x:Name="tbFilterDifficulty" Width="150" Background="#404040" Foreground="White" Padding="5" VerticalContentAlignment="Center" ToolTip="Szűrés nehézségre"/>
+                    <Button x:Name="btnFilterByDifficulty" Content="Szűrés nehézségre" Width="130" Margin="5,0,0,0" Click="BtnFilterByDifficulty_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBox x:Name="tbFilterCategory" Width="150" Background="#404040" Foreground="White" Padding="5" VerticalContentAlignment="Center" ToolTip="Szűrés kategóriára"/>
+                    <Button x:Name="btnFilterByCategory" Content="Szűrés kategóriára" Width="130" Margin="5,0,0,0" Click="BtnFilterByCategory_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                    <Button x:Name="btnSortByAverageScore" Content="Rendezés átlagpontszám szerint" Width="200" Margin="0,0,5,0" Click="BtnSortByAverageScore_Click"/>
+                    <Button x:Name="btnResetFiltersAndSort" Content="Szűrők/Rendezés törlése" Width="160" Click="BtnResetFiltersAndSort_Click"/>
+                </StackPanel>
+
+
+                <!-- Kvízek listája görgethetően -->
+                <TextBlock Text="Kvízek listája" Foreground="Gray" Margin="0,0,0,5"/>
+                <ScrollViewer Height="250" VerticalScrollBarVisibility="Auto" Background="#202020" Padding="5">
+                    <StackPanel x:Name="spQuizzes" />
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
